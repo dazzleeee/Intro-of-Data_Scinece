@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+class birthday_Problem():
+    data_range = range(1,367)
+   
+    
+    def __init__(self,run_times):
+        self.run_times = run_times
+    
+
+    
+    def get_Data(self,data_range,number_p):
+        Data = np.random.choice(data_range,number_p,replace=True)
+        return Data
+        
+    def if_same(self,Data):
+        if len(Data)>len(set(Data)):
+            return True
+        
+    def run(self,run_times):
+        probs=[]
+        count = 0
+        for number_p in range(1,101):
+            for i in range(run_times):
+                Data=self.get_Data(self.data_range,number_p)
+                if self.if_same(Data):
+                    count+=1
+            probs.append(count/run_times)
+        return probs
+    
+b_P=birthday_Problem(1000)
+probs=b_P.run(1000)
+n=range(1,101)
+plt.plot(n,probs)
+plt.show
+    
+            
+    
